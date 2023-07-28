@@ -1,0 +1,79 @@
+.portfolio {
+  padding: 0 70px 125px;
+}
+
+.portfolio__title {
+  color: #8B8B8B;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: 'Inter';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 111.111% */
+  margin: 0 0 50px;
+}
+
+.portfolio__item {
+  padding-bottom: 19px;
+  border-bottom: 1px solid #E6E6E6;
+  /* #424242 или #E6E6E6 ?? все 3 или только 2 средние? */
+}
+
+.portfolio__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.portfolio__item:not(:first-child) {
+  padding-top: 20px;
+}
+
+.portfolio__link {
+  color: #FFF;
+  font-family: 'Inter';
+  /* font-size: 30px; */
+  font-size: clamp(1.125rem, 0.875rem + 1.25vw, 1.875rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 50px; /* 166.667% */
+  letter-spacing: -1.2px;
+
+  display: block;
+  background-image: url('../../images/arrow.svg');
+  background-repeat: no-repeat;
+  background-position: center right 6px;
+
+}
+
+@media (max-width: 768px) {
+
+  .portfolio {
+    padding: 0 50px 90px;
+  }
+
+  .portfolio__link {
+    /* font-size: 28px; */
+    letter-spacing: -1.12px;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .portfolio {
+    padding: 0 14px 70px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .portfolio__link {
+    /* font-size: 18px; */
+    line-height: 28px; /* 155.556% */
+    letter-spacing: -0.72px;
+
+    background-position: center right 5px;
+    background-size: 10px;
+  }
+}
