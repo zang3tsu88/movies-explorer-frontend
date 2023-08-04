@@ -12,10 +12,10 @@ function Footer() {
           </p>
           <ul className="list footer__items">
             <li className="footer__item">
-              <a href="https://github.com/dacorm/" className="link footer__link footer__text">Яндекс.Практикум</a>
+              <a href="https://github.com/zang3tsu88/" className="link footer__link footer__text">Яндекс.Практикум</a>
             </li>
             <li className="footer__item">
-              <a href="https://github.com/dacorm/" className="link footer__link footer__text">Github</a>
+              <a href="https://github.com/zang3tsu88/" className="link footer__link footer__text">Github</a>
             </li>
           </ul>
         </div>

@@ -35,7 +35,8 @@ body {
   transition: opacity 200ms ease-in;
 }
 
-.link:hover {
+.link:hover,
+.link:focus  {
   opacity: 0.5;
 }
 
