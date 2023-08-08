@@ -7,7 +7,7 @@ function Login() {
     <div className="form-container">
       <img src={logo} alt="логотип" className="logo form-container__logo" />
       <h1 className="form-container__title">Рады видеть!</h1>
-      <form className="form">
+      <form className="form" name="login">
 
         <div className="form__input-container">
 

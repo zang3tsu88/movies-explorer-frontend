@@ -130,7 +130,7 @@
 
 
 .hamburger-btn {
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
   width: 43px;
   height: 40px;
   padding: 0;
@@ -140,6 +140,7 @@
 
   display: grid;
   place-items: center;
+  /* z-index: 20; */
 
 }
 
@@ -180,13 +181,64 @@
   opacity: 0;
 }
 
-
 .navtab {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+
+.navtab__window {
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   width: 520px;
-  background-color: darkolivegreen;
+  background-color: #202020;;
   z-index: 10;
+  padding: 159px 0 92px;
+}
+
+.navtab__btn-close {
+  position: absolute;
+  top: 23px;
+  right: 23px;
+}
+
+.navtab__link-list {
+  display: grid;
+  justify-items: center;
+  grid-template-rows: repeat(3, max-content) 1fr;
+  gap: 28px;
+  height: 100%;
+  align-items: end;
+}
+
+.navtab__link {
+  color: #FFF;
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: 'Inter';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding-bottom: 5px;
+}
+
+.navtab__link_type_account {
+  font-size: 14px;
+  line-height: 16px; /* 114.286% */
+}
+
+.navtab__link_active {
+  border-bottom: 2px solid white;
+}
+
+@media (max-width: 500px) {
+  .navtab__window {
+    width: 100%;
+    padding: 144px 0 48px;
+  }
 }

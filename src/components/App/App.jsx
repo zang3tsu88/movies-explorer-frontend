@@ -1,36 +1,62 @@
 import './App.css';
 import Header from '../Header/Header';
-import Promo from '../Promo/Promo';
-import AboutProject from '../AboutProject/AboutProject';
-import Techs from '../Techs/Techs';
-import AboutMe from '../AboutMe/AboutMe';
-import Portfolio from '../Portfolio/Portfolio';
+
 import Footer from '../Footer/Footer';
 import NotFound from '../NotFound/NotFound';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Movies from '../Movies/Movies';
+import { Route, Routes } from 'react-router-dom';
+import Main from '../Main/Main';
+import Profile from '../Profile/Profile';
 
 function App() {
   return (
     <>
-      <Header />
+      <Routes>
+        <Route path="/" element={
+          <>
+          <Header />
+          <Main/>
+          <Footer />
+          </>
+          } />
 
-      {/* <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio /> */}
+        <Route path="/signup" element={
+          <Register />
+          } />
 
+        <Route path="/signin" element={
+          <Login />
+        } />
 
-      {/* <NotFound /> */}
-      {/* <Register /> */}
-      {/* <Login /> */}
-      <Movies />
-    <Footer />
+        <Route path="/profile" element={
+          <>
+            <Header />
+            <Profile />
+          </>
+        } />
 
+        <Route path="/movies" element={
+          <>
+            <Header />
+            <Movies />
+            <Footer />
+          </>
+        } />
 
+        <Route path="/saved-movies" element={
+          <>
+            <Header />
+            <Movies />
+            <Footer />
+          </>
+        } />
 
+        <Route path="*" element={
+          <NotFound />
+        } />
+      </Routes>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';import './Promo.css'
+import './Promo.css'
 import webGlobe from '../../images/web-globe.svg'
 
 function Promo() {
@@ -11,7 +11,7 @@ function Promo() {
           <p className="promo__text">
             Листайте ниже, чтобы узнать больше про этот проект и&nbsp;его создателя.</p>
         </div>
-      <Link className='link promo__link'>Узнать больше</Link>
+      <a href="#about-project" className='link promo__link'>Узнать больше</a>
       </div>
       <img src={webGlobe} alt="Промо веб глобус" className="promo__img" />
     </section>
