@@ -1,57 +1,89 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
 import './Header.css'
+import { Link } from 'react-router-dom'
+import classNames from 'classnames'
+import { useEffect, useState } from 'react';
+import BurgerButton from '../BurgerButton';
+import Navtab from '../NavTab';
 
-// const isLoggedIn = false;
+// Temp solution to switch headers
+// For landing : false, true
+// For movies: true, false
+const isLoggedIn = true;
+const isLanding = false;
 
 function Header() {
+
+  const [ isNavtabOpen, setIsNavtabOpen ] = useState(false);
+
+  const handleNavtabOpenState = () => setIsNavtabOpen(prev => !prev);
+
+  // prevents scrolling when modal is open
+  // close on overlay click
+  useEffect(() => {
+
+    const closeOnOverlayClick = (e) => {
+      if (e.target.classList.contains('navtab_active')) {
+        handleNavtabOpenState();
+      }
+    }
+
+    if (isNavtabOpen) {
+      document.body.style.overflow = 'hidden';
+      document.addEventListener('click', closeOnOverlayClick)
+    }
+
+    return () => {
+      document.removeEventListener('click', closeOnOverlayClick)
+      document.body.style.overflow = 'unset'
+    };
+  }, [isNavtabOpen])
+
   return (
     <>
-    <div className="header header_accent-clr">
+      <header className={classNames('header', {'header_accent-clr': isLanding })} >
 
-         <nav className='header__nav'>
-          <ul className='list header__link-list header__link-list_type_landing'>
+        <Link to="/" className='link logo header__logo' />
 
-            <li><Link to="/" className='link logo header__logo' /></li>
+        <nav className={classNames('nav', 'header__nav', {'header__nav_landing': isLanding})} >
+          {
+            isLoggedIn
+            ?
+            (<>
+              <div className='header__link_type_movies-container'>
+              <Link to="/movies" className='link header__link header__link_type_movies'>Фильмы</Link>
+              <Link to="/saved-movies" className='link header__link header__link_type_saved-movies'>Сохранённые фильмы</Link>
+              </div>
 
-
-            <li><Link to="/movies" className='link header__link header__link_type_movies'>Фильмы</Link></li>
-            <li><Link to="/saved-movies" className='link header__link header__link_type_saved-movies'>Сохранённые фильмы</Link></li>
-
-              {/* <li><Link to="/signup" className='link header__link'>Регистрация</Link></li>
-              <li><Link to="/signin" className='link header__link header__link_type_login'>Войти</Link></li> */}
-
-            <li><Link to="/signin" className='link header__link header__link_type_account'>Аккаунт</Link></li>
-
-          </ul>
+              <Link to="/profile" className='link header__link header__link_type_account'>Аккаунт</Link>
+            </>)
+            : (
+            <>
+              <Link to="/signup" className='link header__link header__link_type_signup'>Регистрация</Link>
+              <Link to="/signin" className='link header__link header__link_type_login'>Войти</Link>
+            </>
+            )}
         </nav>
 
+        {!isLanding
+          && (
+          // <button className={classNames('link', 'hamburger-btn', {
+          //   'hamburger-btn_landing': isLanding,
+          //   'hamburger-btn_clicked': isNavtabOpen
+          // })}
+          //   onClick={() => setIsNavtabOpen(prev => !prev)} >
+          //   <div className='hamburger-btn__bar' />
+          // </button>
 
-      <button className="link hamburger-btn">
-        <div className='hamburger-btn__bar' />
-      </button>
+          <BurgerButton
+            isLanding={isLanding}
+            isNavtabOpen={isNavtabOpen}
+            toggleOpenClose={handleNavtabOpenState} />
 
+        )}
 
+        <Navtab isNavtabOpen={isNavtabOpen} />
 
-    </div>
-
-    {/* <div className="navtab">
-      <nav className="navtab__window">
-
-        <button className="link hamburger-btn navtab__btn-close">
-          <div className='hamburger-btn__bar' />
-        </button>
-
-        <ul className='list navtab__link-list'>
-          <li><Link to="/" className='link navtab__link' />Главная</li>
-          <li><Link to="/movies" className='link navtab__link header__link_type_movies navtab__link_active'>Фильмы</Link></li>
-          <li><Link to="/saved-movies" className='link navtab__link header__link_type_saved-movies'>Сохранённые фильмы</Link></li>
-
-          <li><Link to="/signin" className='link navtab__link navtab__link_type_account header__link_type_account'>Аккаунт</Link></li>
-        </ul>
-      </nav>
-    </div> */}
-
+      </header>
     </>
   )
 }

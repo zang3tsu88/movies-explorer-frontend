@@ -40,8 +40,7 @@ body {
   transition: opacity 200ms ease-in;
 }
 
-.link:hover,
-.link:focus  {
+.link:hover {
   opacity: 0.5;
 }
 

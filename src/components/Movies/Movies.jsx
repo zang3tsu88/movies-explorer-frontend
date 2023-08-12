@@ -2,6 +2,8 @@ import './Movies.css'
 import SearchForm from '../SearchForm/SearchForm'
 import Preloader from '../Preloader/Preloader'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
+import movies from '../../utils/movies'
+
 
 function Movies() {
   return (
@@ -10,7 +12,7 @@ function Movies() {
     {/* <Preloader /> */}
 
     <section className="movies">
-      <MoviesCardList />
+      <MoviesCardList movies={movies} />
 
       <button
         type='button'
