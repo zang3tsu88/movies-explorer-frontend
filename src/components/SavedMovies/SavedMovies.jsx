@@ -1,5 +1,5 @@
-import MoviesCardList from '../MoviesCardList/MoviesCardList'
-import SearchForm from '../SearchForm/SearchForm'
+import MoviesCardList from '../MoviesCardList'
+import SearchForm from '../SearchForm'
 import './SavedMovies.css'
 import movies from '../../utils/movies'
 
@@ -8,7 +8,7 @@ function SavedMovies() {
   const savedMovies = movies.filter((movie) => movie.saved)
 
   return (
-    <>
+    <main>
       <SearchForm />
       {/* <Preloader /> */}
 
@@ -22,7 +22,7 @@ function SavedMovies() {
         </button>
 
       </section>
-    </>
+    </main>
   )
 }
 

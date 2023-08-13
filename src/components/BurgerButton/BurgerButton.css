@@ -42,15 +42,14 @@
   .hamburger-btn__bar::before { bottom: 10px; }
   .hamburger-btn__bar::after { top: 10px; }
 
-  .hamburger-btn_clicked {
-    .hamburger-btn__bar {
-      transform: rotate(45deg);
-    }
-    .hamburger-btn__bar::before {
-      transform: rotate(90deg) translate(10px);
-    }
-    .hamburger-btn__bar::after {
-      opacity: 0;
-    }
+
+  .hamburger-btn_clicked .hamburger-btn__bar {
+    transform: rotate(45deg);
+  }
+  .hamburger-btn_clicked .hamburger-btn__bar::before {
+    transform: rotate(90deg) translate(10px);
+  }
+  .hamburger-btn_clicked .hamburger-btn__bar::after {
+    opacity: 0;
   }
 }

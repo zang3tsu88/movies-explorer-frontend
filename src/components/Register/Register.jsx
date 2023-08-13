@@ -16,21 +16,27 @@ function Register() {
         <input
           type="text"
           id='name'
-          className="form__input" />
+          className="form__input"
+          required
+          minLength={1} />
         <span className="form__error" />
 
         <label htmlFor="email" className="form__label">E-mail</label>
         <input
           type="email"
           id='email'
-          className="form__input" />
+          className="form__input"
+          required
+          minLength={1} />
         <span className="form__error" />
 
         <label htmlFor="password" className="form__label">Пароль</label>
         <input
           type="password"
           id='password'
-          className="form__input" />
+          className="form__input"
+          required
+          minLength={1} />
         <span className="form__error" />
 
         </div>

@@ -1,15 +1,14 @@
 import './App.css';
-import Header from '../Header/Header';
-
-import Footer from '../Footer/Footer';
-import NotFound from '../NotFound';
-import Register from '../Register/Register';
-import Login from '../Login/Login';
-import Movies from '../Movies/Movies';
 import { Route, Routes } from 'react-router-dom';
-import Main from '../Main/Main';
-import Profile from '../Profile/Profile';
-import SavedMovies from '../SavedMovies/SavedMovies';
+import Header from '../Header';
+import Main from '../Main';
+import Footer from '../Footer';
+import NotFound from '../NotFound';
+import Register from '../Register';
+import Login from '../Login';
+import Movies from '../Movies';
+import Profile from '../Profile';
+import SavedMovies from '../SavedMovies';
 
 function App() {
   return (

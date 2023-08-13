@@ -1,17 +1,15 @@
 import './Header.css'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react';
 import BurgerButton from '../BurgerButton';
 import Navtab from '../NavTab';
 
-// Temp solution to switch headers
-// For landing : false, true
-// For movies: true, false
-const isLoggedIn = true;
-const isLanding = false;
 
 function Header() {
+  const location = useLocation();
+  const isLanding = location.pathname === '/';
+  const isLoggedIn = true; // change to false to registration/sign-in buttons
 
   const [ isNavtabOpen, setIsNavtabOpen ] = useState(false);
 
@@ -47,32 +45,24 @@ function Header() {
         <nav className={classNames('nav', 'header__nav', {'header__nav_landing': isLanding})} >
           {
             isLoggedIn
-            ?
-            (<>
-              <div className='header__link_type_movies-container'>
-              <Link to="/movies" className='link header__link header__link_type_movies'>Фильмы</Link>
-              <Link to="/saved-movies" className='link header__link header__link_type_saved-movies'>Сохранённые фильмы</Link>
-              </div>
+            ? (
+              <>
+                <div className='header__link-container'>
+                  <Link to="/movies" className='link header__link header__link_type_movies'>Фильмы</Link>
+                  <Link to="/saved-movies" className='link header__link header__link_type_saved-movies'>Сохранённые фильмы</Link>
+                </div>
 
-              <Link to="/profile" className='link header__link header__link_type_account'>Аккаунт</Link>
-            </>)
-            : (
-            <>
-              <Link to="/signup" className='link header__link header__link_type_signup'>Регистрация</Link>
-              <Link to="/signin" className='link header__link header__link_type_login'>Войти</Link>
-            </>
+                <Link to="/profile" className='link header__link header__link_type_account'>Аккаунт</Link>
+              </>
+            ) : (
+              <>
+                <Link to="/signup" className='link header__link header__link_type_signup'>Регистрация</Link>
+                <Link to="/signin" className='link header__link header__link_type_login'>Войти</Link>
+              </>
             )}
         </nav>
 
-        {!isLanding
-          && (
-          // <button className={classNames('link', 'hamburger-btn', {
-          //   'hamburger-btn_landing': isLanding,
-          //   'hamburger-btn_clicked': isNavtabOpen
-          // })}
-          //   onClick={() => setIsNavtabOpen(prev => !prev)} >
-          //   <div className='hamburger-btn__bar' />
-          // </button>
+        {!isLanding && (
 
           <BurgerButton
             isLanding={isLanding}

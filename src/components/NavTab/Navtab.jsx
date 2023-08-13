@@ -27,7 +27,7 @@ function Navtab({ isNavtabOpen }) {
           </li>
 
           <li>
-            <NavLink to="/profile" className='link navtab__link navtab__link_type_account header__link_type_account' >Аккаунт</NavLink>
+            <NavLink to="/profile" className='link navtab__link navtab__link_type_account header__link header__link_type_account' >Аккаунт</NavLink>
           </li>
         </ul>
       </nav>

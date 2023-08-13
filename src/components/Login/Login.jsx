@@ -15,14 +15,18 @@ function Login() {
         <input
           type="email"
           id='email'
-          className="form__input" />
+          className="form__input"
+          required
+          minLength={1} />
         <span className="form__error" />
 
         <label htmlFor="password" className="form__label">Пароль</label>
         <input
           type="password"
           id='password'
-          className="form__input" />
+          className="form__input"
+          required
+          minLength={1} />
         <span className="form__error" />
 
         </div>
@@ -32,7 +36,7 @@ function Login() {
         </button>
       </form>
         <p className="form__question">
-        Ещё не&nbsp;зарегистрированы?&nbsp;
+          Ещё не&nbsp;зарегистрированы?&nbsp;
           <Link className="link form__link" to="/signup">Регистрация</Link>
         </p>
 

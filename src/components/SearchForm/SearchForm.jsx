@@ -1,15 +1,17 @@
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox'
+import FilterCheckbox from '../FilterCheckbox'
 import './SearchForm.css'
 
 function SearchForm() {
   return (
-    <section className="search">
+    <section className="search" aria-label='поиск'>
       <form className="search-form">
         <input
           type="text"
           className="search-form__input"
           placeholder='Фильм'
           name='search'
+          required
+          minLength={1}
         />
         <button
           className="link search-form__btn"

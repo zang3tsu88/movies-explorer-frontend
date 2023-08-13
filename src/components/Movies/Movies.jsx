@@ -1,13 +1,13 @@
 import './Movies.css'
-import SearchForm from '../SearchForm/SearchForm'
-import Preloader from '../Preloader/Preloader'
-import MoviesCardList from '../MoviesCardList/MoviesCardList'
+import SearchForm from '../SearchForm'
+// import Preloader from '../Preloader'
+import MoviesCardList from '../MoviesCardList'
 import movies from '../../utils/movies'
 
 
 function Movies() {
   return (
-    <>
+    <main>
     <SearchForm />
     {/* <Preloader /> */}
 
@@ -21,7 +21,7 @@ function Movies() {
       </button>
 
     </section>
-    </>
+    </main>
   )
 }
 

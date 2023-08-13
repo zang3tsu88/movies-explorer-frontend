@@ -52,7 +52,7 @@
   background: #3DDC84;
 }
 
-.header__link_type_movies-container{
+.header__link-container {
   display: flex;
   gap: 16px;
 }
