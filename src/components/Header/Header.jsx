@@ -42,7 +42,7 @@ function Header() {
 
         <Link to="/" className='link logo header__logo' />
 
-        <nav className={classNames('nav', 'header__nav', {'header__nav_landing': isLanding})} >
+        <nav className='nav header__nav' >
           {
             isLoggedIn
             ? (
@@ -62,14 +62,14 @@ function Header() {
             )}
         </nav>
 
-        {!isLanding && (
+        <BurgerButton
+          isLanding={isLanding}
+          isNavtabOpen={isNavtabOpen}
+          toggleOpenClose={handleNavtabOpenState} />
 
-          <BurgerButton
-            isLanding={isLanding}
-            isNavtabOpen={isNavtabOpen}
-            toggleOpenClose={handleNavtabOpenState} />
 
-        )}
+        {/* {!isLanding && (
+        )} */}
 
         <Navtab isNavtabOpen={isNavtabOpen} />
 

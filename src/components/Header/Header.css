@@ -100,20 +100,9 @@
     padding: 0 30px;
   }
 
-  /*
-  ORDER of next 2 header__nav rules
-  MATTERS. landing buttons on
-  size < 768 dissapear otherwise
-   */
   .header__nav {
     display: none;
   }
-
-  .header__nav_landing {
-    display: flex;
-  }
-
-  /*  HAMBURGER BTN */
 
 }
 
@@ -134,5 +123,3 @@
     padding: 5px 12px;
   }
 }
-
-/*********** NAVTAB ************/

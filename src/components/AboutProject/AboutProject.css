@@ -110,10 +110,6 @@
   .about-project__steps {
     grid-template-columns: 140px 4fr;
   }
-
-  .about-project__step-description {
-    font-family: 'Suisse Intl';
-  }
 }
 
 @media (max-width: 500px) {
