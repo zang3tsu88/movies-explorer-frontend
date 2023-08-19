@@ -9,7 +9,9 @@ import Navtab from '../NavTab';
 function Header() {
   const location = useLocation();
   const isLanding = location.pathname === '/';
-  const isLoggedIn = true; // change to false to registration/sign-in buttons
+
+  // TODO(zang3tsu88): change to false to registration/sign-in buttons
+  const isLoggedIn = true;
 
   const [ isNavtabOpen, setIsNavtabOpen ] = useState(false);
 
@@ -66,10 +68,6 @@ function Header() {
           isLanding={isLanding}
           isNavtabOpen={isNavtabOpen}
           toggleOpenClose={handleNavtabOpenState} />
-
-
-        {/* {!isLanding && (
-        )} */}
 
         <Navtab isNavtabOpen={isNavtabOpen} />
 
