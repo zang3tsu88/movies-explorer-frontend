@@ -1,0 +1,164 @@
+
+.about-project {
+  padding: 110px 70px;
+}
+
+.title {
+  color: #FFF;
+  font-family: 'Inter';
+  font-size: 22px;
+  /* font-size: clamp(1.125rem, 1.042rem + 0.417vw, 1.375rem); */
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+
+  margin: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #DADADA;
+}
+
+.about-project__items {
+  padding: 70px 0 110px;
+  display: flex;
+  gap: 40px;
+}
+
+.about-project__item {
+  width: 100%;
+}
+
+.about-project__item-title {
+  color: #FFF;
+  font-family: 'Inter';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+  margin: 0 0 26px;
+}
+
+.about-project__item-text {
+  color: #FFF;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  margin: 0;
+}
+
+.about-project__steps {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.about-project__step_first {
+  color: #000;
+}
+
+.about-project__step-title {
+  text-align: center;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  background-color: #303030;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  margin: 0;
+  margin-bottom: 14px;
+}
+
+.about-project__step-title_first {
+  color: #000;
+  background-color: #3DDC84;
+}
+
+.about-project__step-description {
+  color: #8B8B8B;
+  text-align: center;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px; /* 121.429% */
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .about-project__items {
+    padding-bottom: 93px;
+  }
+
+  .about-project__item-title {
+    margin-bottom: 22px;
+  }
+
+  .about-project__item-text {
+    font-size: 12px;
+    line-height: 18px; /* 150% */
+  }
+
+  .about-project__steps {
+    grid-template-columns: 140px 4fr;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    padding-bottom: 28px;
+  }
+  .about-project__items {
+    padding-top: 60px;
+    padding-bottom: 59px;
+    gap: 56px;
+    flex-direction: column;
+  }
+  .about-project__item-title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    margin-bottom: 16px;
+
+    /* мой пиксель перфект */
+    line-height: 22px;
+  }
+
+  .about-project__item-text {
+    font-size: 11px;
+    line-height: 16px; /* 145.455% */
+  }
+
+  .about-project__steps {
+    grid-template-columns: 100px 4fr;
+  }
+
+  .about-project__step-title {
+    font-size: 11px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+
+    /* мой пиксель перфект
+    ** было 10
+    **/
+    margin-bottom: 7px;
+  }
+
+  .about-project__step-description {
+    font-size: 11px;
+  }
+}

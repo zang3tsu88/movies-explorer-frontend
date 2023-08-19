@@ -1,0 +1,50 @@
+@import url('../../vendor/normalize.css');
+@import url('../../vendor/fonts/fonts.css');
+
+/* :root {
+  --clr-bg-primary: hsl(0, 0%, 13%);
+  --clr-bg-secondary:hsl(0, 0%, 15%);
+  --clr-bg-accent: hsl(199, 81%, 14%);
+  --clr-text-primary: hsla(0, 0%, 100%, 1);
+  --clr-text-secondary: hsla(0, 0%, 0%, 1);
+  --clr-text-accent: hsla(0, 0%, 0%, 1);
+  --clr-accent-primary: hsla(147, 69%, 55%, 1);
+  --clr-accent-secondary: hsla(344, 85%, 57%, 1);
+  --clr-accent-third: hsla(0, 0%, 19%, 1);
+  --clr-accent-four: hsla(217, 89%, 61%, 1);
+} */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", "Arial", "Helvetica", sans-serif;
+  background-color: #202020;;
+  color: #fff;
+  text-rendering: optimizeLegibility;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 200ms ease-in;
+}
+
+.link:hover {
+      opacity: 0.5;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

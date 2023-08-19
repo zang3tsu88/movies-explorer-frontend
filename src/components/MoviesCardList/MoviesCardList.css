@@ -1,0 +1,28 @@
+.movies__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 358px));
+  gap: 32px;
+  justify-content: center;
+  justify-items: center;
+}
+
+@media (max-width: 758px) {
+
+  .movies__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 339px));
+    gap: 35px 24px ;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .movies__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    gap: 16px ;
+  }
+
+}
