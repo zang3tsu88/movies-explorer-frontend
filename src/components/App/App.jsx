@@ -1,5 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import CurrentUserContext from '../../context/CurrentUserContext'
 import Header from '../Header';
 import Main from '../Main';
 import Footer from '../Footer';
@@ -12,7 +13,7 @@ import SavedMovies from '../SavedMovies';
 
 function App() {
   return (
-    <>
+    <CurrentUserContext.Provider >
       <Routes>
         <Route path="/" element={
           <>
@@ -57,7 +58,7 @@ function App() {
           <NotFound />
         } />
       </Routes>
-    </>
+    </CurrentUserContext.Provider>
   );
 }
 
