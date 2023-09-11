@@ -1,5 +1,8 @@
 .movie {
   max-width: 360px;
+  /* TODO
+  MAYBE MAKE width: 360, or li.movies__item width 100.
+  some movie posters can be skinny */
   height: 319px;
   border-radius: 6px;
   background: #222;
@@ -33,6 +36,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  max-width: 240px;
 }
 
 .movie__duration {
@@ -49,8 +53,6 @@
 .movie__image {
   display: block;
   width: 100%;
-
-  /* ??? */
   object-fit: cover;
   height: 100%;
 }

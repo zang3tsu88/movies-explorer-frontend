@@ -1,8 +1,6 @@
 import { useCallback, useState } from "react"
 import isEmail from 'validator/lib/isEmail'
-import MESSAGES from "../utils/constants";
-
-const nameRegex = /^[a-zа-яё\-\s]+$/i;
+import { MESSAGES, NAME_REGEX } from "../utils/constants";
 
 function useForm(initialValues = {}) {
   const [ values, setValues ] = useState(initialValues);
@@ -14,7 +12,7 @@ function useForm(initialValues = {}) {
 
     switch (name) {
       case 'name':
-        !nameRegex.test(value)
+        !NAME_REGEX.test(value)
           ? e.target.setCustomValidity(MESSAGES.NAME_ERROR)
           : e.target.setCustomValidity('');
         break;
@@ -23,6 +21,12 @@ function useForm(initialValues = {}) {
           ? e.target.setCustomValidity(MESSAGES.EMAIL_ERROR)
           : e.target.setCustomValidity('');
         break;
+      // TODO: POSSIBLY REMOVE SEARCH VALIDATION
+      // case 'search':
+      //   e.target.validity.valueMissing
+      //     ? e.target.setCustomValidity(MESSAGES.EMPTY_SEARCH_ERROR)
+      //     : e.target.setCustomValidity('');
+      //   break;
       default:
         break;
     }

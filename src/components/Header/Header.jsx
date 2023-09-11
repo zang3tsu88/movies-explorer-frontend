@@ -1,48 +1,35 @@
 import './Header.css'
 import { Link, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import BurgerButton from '../BurgerButton';
 import Navtab from '../NavTab';
+import useModalClose from '../../hooks/useModalClose';
 
 
-function Header() {
+function Header({ isLoggedIn }) {
   const location = useLocation();
   const isLanding = location.pathname === '/';
-
-  // TODO(zang3tsu88): change to false to registration/sign-in buttons
-  const isLoggedIn = true;
-
   const [ isNavtabOpen, setIsNavtabOpen ] = useState(false);
 
   const handleNavtabOpenState = () => setIsNavtabOpen(prev => !prev);
 
-  // prevents scrolling when modal is open
-  // close on overlay click
-  useEffect(() => {
-
-    const closeOnOverlayClick = (e) => {
-      if (e.target.classList.contains('navtab_active')) {
-        handleNavtabOpenState();
-      }
-    }
-
-    if (isNavtabOpen) {
-      document.body.style.overflow = 'hidden';
-      document.addEventListener('click', closeOnOverlayClick)
-    }
-
-    return () => {
-      document.removeEventListener('click', closeOnOverlayClick)
-      document.body.style.overflow = 'unset'
-    };
-  }, [isNavtabOpen])
+  useModalClose(isNavtabOpen, handleNavtabOpenState);
 
   return (
     <>
       <header className={classNames('header', {'header_accent-clr': isLanding })} >
 
         <Link to="/" className='link logo header__logo' />
+
+        {/*
+        TODO(zang3tsu88): burger and heading problem!!!
+         on landing registration navigation disapears on 768 because
+         of .header__nav { display: none;}
+
+         Need to fix or redo header if my solution doesnt fit review requirements
+         Right now burger works with sign-up sign-in links
+         */}
 
         <nav className='nav header__nav' >
           {
@@ -69,7 +56,7 @@ function Header() {
           isNavtabOpen={isNavtabOpen}
           toggleOpenClose={handleNavtabOpenState} />
 
-        <Navtab isNavtabOpen={isNavtabOpen} />
+        <Navtab isNavtabOpen={isNavtabOpen} isLoggedIn={isLoggedIn} />
 
       </header>
     </>

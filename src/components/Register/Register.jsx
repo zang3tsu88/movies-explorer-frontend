@@ -1,11 +1,11 @@
 import './Register.css'
 import logo from '../../images/logo.svg'
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import useForm from '../../hooks/useFormValidation'
 import classNames from 'classnames';
+import useForm from '../../hooks/useForm'
+import { useEffect } from 'react';
 
-function Register() {
+function Register({ registerUser, errorMessage, setErrorMessage }) {
   const { values, errors, isValid, handleChange, resetForm } = useForm({
     name: '',
     email: '',
@@ -14,13 +14,25 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // TODO: REMOVE CONSOLE.LOG
     console.log(values)
+    registerUser({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    })
+    setErrorMessage('');
   }
+
+  useEffect(() => {
+    resetForm();
+  }, [resetForm])
+
   return (
     <div className="form-container">
       <img src={logo} alt="логотип" className="logo form-container__logo" />
       <h1 className="form-container__title">Добро пожаловать!</h1>
-      <form className="form" onSubmit={handleSubmit} noValidate>
+      <form className="form" name="register" onSubmit={handleSubmit} noValidate>
         <div className="form__input-container">
 
           <label htmlFor="name" className="form__label">Имя</label>
@@ -71,13 +83,12 @@ function Register() {
             name='password'
             id='password'
             className="form__input"
-            autoComplete="current-password"
+            autoComplete="new-password"
             required
             minLength={4}
             value={values.password}
             onChange={handleChange}
           />
-
           <span className={classNames(
             'form__error',
             {'form__error_active' : errors.password}
@@ -88,12 +99,20 @@ function Register() {
 
         </div>
 
+        <span className={classNames(
+            'form__error',
+            'form__error_submit',
+            {'form__error_active' : errorMessage}
+            )}
+        >
+          {errorMessage}
+        </span>
+
         <button
           type="submit"
           disabled={!isValid}
           className={classNames(
             'form__submit-btn', {
-            'form__submit-btn_disabled': !isValid,
             'link': isValid,
           })}
         >

@@ -1,11 +1,11 @@
 import MoviesCardList from '../MoviesCardList'
 import SearchForm from '../SearchForm'
 import './SavedMovies.css'
-import movies from '../../utils/movies'
+import testMovies from '../../utils/movies'
 
-function SavedMovies() {
+function SavedMovies({ movies }) {
 
-  const savedMovies = movies.filter((movie) => movie.saved)
+  const savedMovies = testMovies.filter((movie) => movie.saved)
 
   return (
     <main>
@@ -14,13 +14,6 @@ function SavedMovies() {
 
       <section className="movies">
         <MoviesCardList movies={savedMovies} />
-
-        <button
-          type='button'
-          className='link movies__more-btn' >
-            Ещё
-        </button>
-
       </section>
     </main>
   )

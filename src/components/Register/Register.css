@@ -66,15 +66,20 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  display: inline-block;
-  min-height: 18px;
+  display: block;
+  min-height: 24px;
   width: 100%;
-  margin-top: 6px;
+  margin-top: 3px;
   opacity: 0;
 }
 
 .form__error_active {
   opacity: 1;
+}
+
+.form__error_submit {
+  text-align: center;
+  margin-top: auto;
 }
 
 .form__submit-btn {
@@ -93,9 +98,9 @@
   padding: 15px 30px;
 }
 
-.form__submit-btn_disabled {
-  opacity: 0.8;
-  background: #3456F3;
+.form__submit-btn:disabled {
+  background: #f8f8f8;
+  color: #c2c2c2;
 }
 
 .form__question {

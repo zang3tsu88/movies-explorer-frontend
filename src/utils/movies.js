@@ -15,67 +15,67 @@ import image12 from '../images/movie_pic-12.png'
 const movies = [
   {
     title: 'В погоне за Бенкси',
-    duration: '27 минут',
+    duration: 27,
     image: image1,
     saved: true,
   },
   {
     title: 'В погоне за Бенкси 2',
-    duration: '27 минут',
+    duration: 27,
     image: image2,
     saved: true,
   },
   {
     title: 'В погоне за Бенкси 3',
-    duration: '27 минут',
+    duration: 47,
     image: image3
   },
   {
     title: 'В погоне за Бенкси',
-    duration: '27 минут',
+    duration: 127,
     image: image4
   },
   {
     title: 'В погоне за Бенкси',
-    duration: '27 минут',
+    duration: 127,
     image: image5
   },
   {
     title: 'В погоне за Бенкси',
-    duration: '27 минут',
+    duration: 127,
     image: image6,
     saved: true,
   },
   {
     title: 'В погоне за Бенкси',
-    duration: '27 минут',
+    duration: 127,
     image: image7
   },
   {
     title: 'В погоне за Бенкси',
-    duration: '27 минут',
+    duration: 127,
     image: image8
   },
   {
     title: 'В погоне за Бенкси',
-    duration: '27 минут',
+    duration: 127,
     image: image9,
     saved: true,
   },
   {
     title: 'В погоне за Бенкси',
-    duration: '27 минут',
+    duration: 127,
     image: image10
   },
   {
     title: 'В погоне за Бенкси',
-    duration: '27 минут',
+    duration: 127,
     image: image11,
     saved: true,
   },
   {
     title: 'В погоне за Бенкси',
-    duration: '27 минут',
+    duration: 127,
     image: image12
   },
 ]

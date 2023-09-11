@@ -1,33 +1,30 @@
-import { useState } from 'react'
-import FilterCheckbox from '../FilterCheckbox'
 import './SearchForm.css'
+import FilterCheckbox from '../FilterCheckbox'
 import classNames from 'classnames';
+import useForm from '../../hooks/useForm';
 
-function SearchForm() {
+function SearchForm({
+  moviesSearchField,
+  setMoviesSearchField,
+  searchMovies,
+  shortMoviesCheckbox,
+  toggleCheckbox,
+  errorMessage
+}) {
 
-  const [ search, setSearch ] = useState('');
-  const [ error, setError ] = useState('')
-  // Нужно ввести ключевое слово
-  const [ isDirty, setIsDirty ] = useState(false);
-
-  const onBlur = (e) => {
-    setIsDirty(true);
+  const handleChange = (e) => {
+    setMoviesSearchField(e.target.value);
   }
 
-  const onChange = (e) => {
-    setSearch(e.target.value);
-  }
-
-  const onSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!search) {
-      setError('Нужно ввести ключевое слово')
-      return;
-    } else {
-      setError('')
-    }
-    console.log(search)
-    console.log('submit')
+    // TODO(zang3tsu88): Remove log and refactor error handlling :
+
+    // После сабмита формы поиска производится валидация.
+    // Если в поле не введён текст, выводится ошибка «Нужно ввести ключевое слово».
+    // Если слово введено, то осуществляется запрос к API
+    console.log('Searching for Movies!')
+    searchMovies();
   }
 
   return (
@@ -35,7 +32,7 @@ function SearchForm() {
       <form
         className="search-form"
         noValidate
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
       >
         <input
           type="text"
@@ -43,29 +40,35 @@ function SearchForm() {
           placeholder='Фильм'
           name='search'
           required
-          minLength={1}
-          value={search}
-          onChange={onChange}
-          onBlur={onBlur}
+          value={moviesSearchField}
+          onChange={handleChange}
         />
 
         <button
-          className="link search-form__btn"
           type='submit'
+          aria-label='Поиск фильмов'
+          className='search-form__btn link'
+          onClick={handleSubmit}
         >
           Найти
         </button>
+
       </form>
 
-      <span className={classNames(
-        'form__error',
-        {'form__error_active' : isDirty && error}
-        )}
+      <span
+        className='form__error form__error_active'
+        // className={classNames(
+        // 'form__error',
+        // // {'form__error_active' : errors.search}
+        // )}
       >
-        {error}
+        {errorMessage}
       </span>
 
-      <FilterCheckbox />
+      <FilterCheckbox
+        shortMoviesCheckbox={shortMoviesCheckbox}
+        toggleCheckbox={toggleCheckbox}
+      />
     </section>
   )
 }
