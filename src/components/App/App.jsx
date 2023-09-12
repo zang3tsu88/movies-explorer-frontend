@@ -39,8 +39,6 @@ function App() {
   const [ preloader, setPreloader ] = useState(false); // TODO : REname to isLoading ???
   const [ errorMessage, setErrorMessage ] = useState('');
 
-
-
   const getMovies = () => {
     movieApi
       .getMovies()
@@ -71,6 +69,30 @@ function App() {
       })
   }
 
+  const filterMovies = (movies, searchField, searchFieldCheckbox) => {
+    return movies.filter((movie) =>
+      searchFieldCheckbox
+        ? movie.duration <= SHORT_MOVIE_DURATION_IN_MINUTES
+        && (movie.nameRU.toLowerCase().includes(searchField.toLowerCase())
+        || movie.nameEN.toLowerCase().includes(searchField.toLowerCase()))
+        : movie.nameRU.toLowerCase().includes(searchField.toLowerCase())
+          || movie.nameEN.toLowerCase().includes(searchField.toLowerCase())
+    )
+  }
+
+  const searchProcess = () => {
+    const newFilteredMovies = filterMovies(movies, moviesSearchField, shortMoviesCheckbox)
+    setFilteredMovies(newFilteredMovies)
+    localStorage.setItem('filteredMovies', JSON.stringify(newFilteredMovies));
+    localStorage.setItem('moviesSearchField', moviesSearchField);
+    localStorage.setItem('shortMoviesCheckbox', shortMoviesCheckbox);
+    // TODO: Maybe not done
+  }
+
+  useEffect(() => {
+    searchProcess();
+  }, [shortMoviesCheckbox,]);
+
   const searchMovies = () => {
     if (!moviesSearchField) {
       setFilteredMovies([])
@@ -89,32 +111,14 @@ function App() {
     }
   }
 
-
-
-  useEffect(() => {
-    searchProcess();
-  }, [shortMoviesCheckbox]);
-
-  const searchProcess = () => {
-    const newFilteredMovies = filterMovies(movies, moviesSearchField, shortMoviesCheckbox)
-    setFilteredMovies(newFilteredMovies)
-    localStorage.setItem('filteredMovies', JSON.stringify(newFilteredMovies));
-    localStorage.setItem('moviesSearchField', moviesSearchField);
-    localStorage.setItem('shortMoviesCheckbox', shortMoviesCheckbox);
-    // TODO: Maybe not done
-  }
-
-
-  const filterMovies = (movies, searchField, searchFieldCheckbox) => {
-    return movies.filter((movie) =>
-      searchFieldCheckbox
-        ? movie.duration <= SHORT_MOVIE_DURATION_IN_MINUTES
-        && (movie.nameRU.toLowerCase().includes(searchField.toLowerCase())
-        || movie.nameEN.toLowerCase().includes(searchField.toLowerCase()))
-        : movie.nameRU.toLowerCase().includes(searchField.toLowerCase())
-          || movie.nameEN.toLowerCase().includes(searchField.toLowerCase())
-    )
-  }
+  const searchSavedMovies = () => {
+    const newFilteredMovies = filterMovies(
+      savedMovies,
+      savedMoviesSearchField,
+      savedShortMoviesCheckbox
+    );
+    setFilteredSavedMovies(newFilteredMovies);
+  };
 
   const registerUser = ({ name, email, password }) => {
     mainApi
@@ -131,6 +135,12 @@ function App() {
         // TODO: Возможно нужно будет вывести какие-то ошибки.
       })
   }
+
+  const checkLike = (movie) => savedMovies.some((item) => item.movieId === movie.movieId);
+
+
+  // ============ AUTH ===================== //
+  // ============ AUTH ===================== //
 
   const loginUser = ({ email, password }) => {
     mainApi
@@ -180,9 +190,9 @@ function App() {
 
     mainApi
       .getUserData()
-      .then(({ name, email }) => {
-        setCurrentUser({ name, email });
-        localStorage.setItem("userData", JSON.stringify({ name, email }));
+      .then((userData) => {
+        setCurrentUser(userData);
+        localStorage.setItem("userData", JSON.stringify(userData));
       })
       .catch(console.log)
 
@@ -206,10 +216,6 @@ function App() {
       })
 
   }, [isLoggedIn])
-
-  const toggleCheckbox = () => {
-    setShortMoviesCheckbox(!shortMoviesCheckbox)
-  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -254,10 +260,11 @@ function App() {
                 moviesSearchField={moviesSearchField}
                 setMoviesSearchField={setMoviesSearchField}
                 shortMoviesCheckbox={shortMoviesCheckbox}
-                toggleCheckbox={toggleCheckbox}
+                toggleCheckbox={() => setShortMoviesCheckbox(!shortMoviesCheckbox)}
                 searchMovies={searchMovies}
                 errorMessage={errorMessage}
                 preloader={preloader}
+                checkLike={checkLike}
               />
               <Footer />
             </>
@@ -267,6 +274,13 @@ function App() {
             <>
               <Header isLoggedIn={isLoggedIn} />
               <SavedMovies
+                savedMovies={savedMovies}
+                savedMoviesSearchField={savedMoviesSearchField}
+                setSavedMoviesSearchField={setSavedMoviesSearchField}
+                savedShortMoviesCheckbox={savedShortMoviesCheckbox}
+                toggleCheckbox={() => setSavedShortMoviesCheckbox(!savedShortMoviesCheckbox)}
+                searchMovies={searchSavedMovies}
+                errorMessage={errorMessage}
                 preloader={preloader}
               />
               <Footer />

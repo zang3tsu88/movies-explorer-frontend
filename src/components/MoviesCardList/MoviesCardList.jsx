@@ -2,7 +2,6 @@ import './MoviesCardList.css'
 import MoviesCard from '../MoviesCard/MoviesCard'
 
 function MoviesCardList({ movies }) {
-  // console.log(movies[0])
   return (
     <ul className="list movies__list">
       {movies.map((movie) => (
@@ -10,6 +9,7 @@ function MoviesCardList({ movies }) {
           title={movie.nameRU}
           duration={movie.duration}
           image={movie.image}
+          // saved={movie.owner === currentUser._id}
           key={movie.movieId}
         />
       ))}

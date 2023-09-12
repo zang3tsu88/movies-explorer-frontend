@@ -1,15 +1,31 @@
 import MoviesCardList from '../MoviesCardList'
 import SearchForm from '../SearchForm'
 import './SavedMovies.css'
-import testMovies from '../../utils/movies'
+// import testMovies from '../../utils/movies'
 
-function SavedMovies({ movies }) {
+function SavedMovies({
+  savedMovies,
+  savedMoviesSearchField,
+  setSavedMoviesSearchField,
+  savedShortMoviesCheckbox,
+  toggleCheckbox,
+  searchMovies,
+  errorMessage,
+  preloader}
+  ) {
 
-  const savedMovies = testMovies.filter((movie) => movie.saved)
+  // const savedMovies = testMovies.filter((movie) => movie.saved)
 
   return (
     <main>
-      <SearchForm />
+      <SearchForm
+        searchField={savedMoviesSearchField}
+        setSearchField={setSavedMoviesSearchField}
+        shortMoviesCheckbox={savedShortMoviesCheckbox}
+        toggleCheckbox={toggleCheckbox}
+        searchMovies={searchMovies}
+        errorMessage={errorMessage}
+      />
       {/* <Preloader /> */}
 
       <section className="movies">
