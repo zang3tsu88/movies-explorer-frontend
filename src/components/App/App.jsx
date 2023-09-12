@@ -87,6 +87,10 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    searchMovies();
+  }, [shortMoviesCheckbox]);
+
   const searchProcess = () => {
     const newFilteredMovies = filterMovies(movies, moviesSearchField, shortMoviesCheckbox)
     setFilteredMovies(newFilteredMovies)
@@ -111,9 +115,8 @@ function App() {
   const registerUser = ({ name, email, password }) => {
     mainApi
       .register(name, email, password)
-      .then((userData) => {
-        setCurrentUser(userData);
-        return loginUser({ email, password });
+      .then(() => {
+        loginUser({ email, password });
       })
       .catch((err) => {
         if (err === HTTP_STATUS_CODES.CONFLICT ){
@@ -130,6 +133,7 @@ function App() {
       .then(({ token }) => {
         localStorage.setItem('jwt', token);
         setIsLoggedIn(true);
+        setCurrentUser({ email, password });
         navigate('/movies', {replace: true})
       })
       .catch((err) => {
