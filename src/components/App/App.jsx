@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../context/CurrentUserContext'
 import Header from '../Header';
 import Main from '../Main';
@@ -38,6 +38,8 @@ function App() {
 
   const [ preloader, setPreloader ] = useState(false); // TODO : REname to isLoading ???
   const [ errorMessage, setErrorMessage ] = useState('');
+
+
 
   const getMovies = () => {
     movieApi
@@ -87,8 +89,10 @@ function App() {
     }
   }
 
+
+
   useEffect(() => {
-    searchMovies();
+    searchProcess();
   }, [shortMoviesCheckbox]);
 
   const searchProcess = () => {
@@ -127,13 +131,13 @@ function App() {
         // TODO: Возможно нужно будет вывести какие-то ошибки.
       })
   }
+
   const loginUser = ({ email, password }) => {
     mainApi
       .login(email, password)
       .then(({ token }) => {
         localStorage.setItem('jwt', token);
         setIsLoggedIn(true);
-        setCurrentUser({ email, password });
         navigate('/movies', {replace: true})
       })
       .catch((err) => {
@@ -162,18 +166,13 @@ function App() {
     if (!token) return;
 
     setIsLoggedIn(true);
-    const cashedUserData = JSON.parse(localStorage.getItem('userData'));
-    if (cashedUserData) {
-      setCurrentUser(cashedUserData);
-    } else {
-      mainApi
-        .getUserData()
-        .then(() => setIsLoggedIn(true))
-        .catch((err) => {
-          setIsLoggedIn(false);
-          console.log(err) // TODO: CLG
-        })
-    }
+    mainApi
+      .getUserData()
+      .then(() => setIsLoggedIn(true))
+      .catch((err) => {
+        setIsLoggedIn(false);
+        console.log(err) // TODO: CLG
+      })
   }, [])
 
   useEffect(() => {
@@ -181,9 +180,9 @@ function App() {
 
     mainApi
       .getUserData()
-      .then((userData) => {
-        setCurrentUser(userData);
-        localStorage.setItem("userData", JSON.stringify(userData));
+      .then(({ name, email }) => {
+        setCurrentUser({ name, email });
+        localStorage.setItem("userData", JSON.stringify({ name, email }));
       })
       .catch(console.log)
 

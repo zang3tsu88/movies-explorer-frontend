@@ -18,8 +18,8 @@ function Movies({
   return (
     <main>
     <SearchForm
-      moviesSearchField={moviesSearchField}
-      setMoviesSearchField={setMoviesSearchField}
+      searchField={moviesSearchField}
+      setSearchField={setMoviesSearchField}
       shortMoviesCheckbox={shortMoviesCheckbox}
       toggleCheckbox={toggleCheckbox}
       searchMovies={searchMovies}

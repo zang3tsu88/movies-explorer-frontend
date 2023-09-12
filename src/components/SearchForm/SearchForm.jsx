@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import useForm from '../../hooks/useForm';
 
 function SearchForm({
-  moviesSearchField,
-  setMoviesSearchField,
+  searchField,
+  setSearchField,
   searchMovies,
   shortMoviesCheckbox,
   toggleCheckbox,
@@ -13,7 +13,7 @@ function SearchForm({
 }) {
 
   const handleChange = (e) => {
-    setMoviesSearchField(e.target.value);
+    setSearchField(e.target.value);
   }
 
   const handleSubmit = (e) => {
@@ -40,7 +40,7 @@ function SearchForm({
           placeholder='Фильм'
           name='search'
           required
-          value={moviesSearchField}
+          value={searchField}
           onChange={handleChange}
         />
 
