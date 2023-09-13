@@ -2,34 +2,84 @@ import './Movies.css'
 import SearchForm from '../SearchForm'
 import Preloader from '../Preloader'
 import MoviesCardList from '../MoviesCardList'
-import movies from '../../utils/movies'
+import { ResizeHandlerComponent } from "../../utils/handleResize";
+import { useEffect, useState } from "react";
+import { filterMovies } from "../../utils/filterMovies";
+import MoviesCard from "../MoviesCard/MoviesCard";
 
+function Movies({ movies, handleRemoveMovie, handleLikeMovie }) {
+  const moviesToShow = ResizeHandlerComponent();
+  const [query, setQuery] = useState(
+      localStorage.getItem("queryMovies") || "",
+  );
+  const [shortFilmsOnly, setShortFilmsOnly] = useState(() => {
+    const savedShortFilmsOnly = localStorage.getItem("shortFilmsOnlyMovies");
+    return savedShortFilmsOnly ? JSON.parse(savedShortFilmsOnly) : false;
+  });
+  const [movieCount, setMovieCount] = useState(0);
+  const [useSearch, setUseSearch] = useState(false)
 
-function Movies({
-  filteredMovies,
-  moviesSearchField,
-  setMoviesSearchField,
-  shortMoviesCheckbox,
-  toggleCheckbox,
-  searchMovies,
-  errorMessage,
-  preloader
-}) {
+  useEffect(() => {
+    setMovieCount(moviesToShow.moviesOnPage);
+  }, [moviesToShow]);
+
+  useEffect(() => {
+    localStorage.setItem("queryMovies", query);
+    if (query !== '') {
+      setUseSearch(true)
+    }
+  }, [query]);
+
+  useEffect(() => {
+    localStorage.setItem("shortFilmsOnlyMovies", JSON.stringify(shortFilmsOnly));
+    if (shortFilmsOnly) {
+      setUseSearch(true)
+    }
+  }, [shortFilmsOnly]);
+
+  const filter = filterMovies(
+    movies,
+    query,
+    shortFilmsOnly,
+    movieCount,
+  );
+
+  const moviesCards = filter.filteredMovies.map((el) => {
+    return (
+      <MoviesCard
+        key={el.id}
+        id={el.id}
+        class={el.class}
+        movie={el}
+        onRemove={handleRemoveMovie}
+        onLike={handleLikeMovie}
+      />
+    );
+  });
+
+  function handleSearch(query) {
+    setQuery(query);
+    setUseSearch(true)
+  }
+
+  function loadMoreMovies() {
+    setMovieCount(movieCount + moviesToShow.addMoviesOnPage);
+  }
+
+  function handleToggleShortFilms(checked) {
+    setShortFilmsOnly(checked);
+    setUseSearch(true)
+  }
+
   return (
     <main>
     <SearchForm
-      searchField={moviesSearchField}
-      setSearchField={setMoviesSearchField}
-      shortMoviesCheckbox={shortMoviesCheckbox}
-      toggleCheckbox={toggleCheckbox}
-      searchMovies={searchMovies}
-      errorMessage={errorMessage}
-
+        onSearch={handleSearch}
+        onToggle={handleToggleShortFilms}
+        checked={shortFilmsOnly}
     />
     <section className="movies">
-      { preloader && <Preloader /> }
-      {/*  TODO : ADD STYLES - movies__nothing-found  */}
-      {/* <p className='movies__'>«Ничего не найдено»</p> */}
+      {/*{ preloader && <Preloader /> }*/}
       {/* <span
         className='form__error form__error_active movies__error'
         // className={classNames(
@@ -41,16 +91,12 @@ function Movies({
       </span> */}
 
       <MoviesCardList
-        movies={filteredMovies}
-        />
-
-      {/* {!(movies.length <= countCards) && ( */}
-      {!(movies.length) && (
-      <button
-        type='button'
-        className='link movies__more-btn' >
-          Ещё
-      </button>)}
+        moviesCards={useSearch ? moviesCards : []}
+        addMovies={loadMoreMovies}
+        maxMovies={movieCount}
+        isSaved={false}
+        movies={filter.countMovies}
+      />
 
     </section>
     </main>

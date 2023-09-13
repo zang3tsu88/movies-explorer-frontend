@@ -21,12 +21,6 @@ function useForm(initialValues = {}) {
           ? e.target.setCustomValidity(MESSAGES.EMAIL_ERROR)
           : e.target.setCustomValidity('');
         break;
-      // TODO: POSSIBLY REMOVE SEARCH VALIDATION
-      // case 'search':
-      //   e.target.validity.valueMissing
-      //     ? e.target.setCustomValidity(MESSAGES.EMPTY_SEARCH_ERROR)
-      //     : e.target.setCustomValidity('');
-      //   break;
       default:
         break;
     }

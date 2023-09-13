@@ -1,18 +1,19 @@
 export const NAME_REGEX = /^[a-zа-яё\-\s]+$/i;
-export const SHORT_MOVIE_DURATION_IN_MINUTES = 40;
 
+export const SHORT_MOVIE_DURATION_IN_MINUTES = 40;
 export const INT_60_MIN = 60;
-export const CARD_COUNT = {
-  WITDH_1280: 4,
+
+export const CARD_ADD = {
+  WIDTH_1280: 3,
+  WIDTH_1024: 2,
+  WIDTH_768: 1,
 }
 
-// TODO: CARD COUNT DEPENDING ON SCREEN SIZE. useResize можно написать хук
-// Обратите внимание, что количество карточек, которые отображаются на странице, зависит от ширины экрана устройства.
-// Ширина 1280px — 4 ряда карточек. Кнопка «Ещё» загружает дополнительный ряд карточек.
-// Ширина 768px — 4 ряда карточек. Кнопка «Ещё» загружает дополнительный ряд карточек.
-// Ширина от 320px до 480px — 5 карточек по 1 в ряд. Кнопка «Ещё» загружает по 2 карточки.
-// В ряду отображайте столько карточек, сколько отображается в вашем макете на соответствующей ширине экрана.
-
+export const CARD_COUNT = {
+  WIDTH_1280: 12,
+  WIDTH_1024: 8,
+  WIDTH_768: 5,
+}
 
 export const MESSAGES = {
   NOTHING_FOUND_SEARCH_ERROR: 'Ничего не найдено',

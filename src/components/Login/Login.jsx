@@ -12,8 +12,6 @@ function Login({ loginUser, errorMessage, setErrorMessage }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: REMOVE CONSOLE.LOG
-    console.log(values)
     loginUser({
       email: values.email,
       password: values.password,

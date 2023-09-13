@@ -11,10 +11,6 @@ function Navtab({ isNavtabOpen, isLoggedIn }) {
     <aside className={classNames('navtab', { 'navtab_active': isNavtabOpen })} >
       <nav className={classNames('navtab__window', { 'navtab__window_active': isNavtabOpen })} >
 
-        {/* <button className="link hamburger-btn navtab__btn-close">
-          <div className='hamburger-btn__bar' />
-        </button> */}
-
         <ul className='list navtab__link-list'>
         {isLoggedIn
           ?

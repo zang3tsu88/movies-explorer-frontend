@@ -22,15 +22,6 @@ function Header({ isLoggedIn }) {
 
         <Link to="/" className='link logo header__logo' />
 
-        {/*
-        TODO(zang3tsu88): burger and heading problem!!!
-         on landing registration navigation disapears on 768 because
-         of .header__nav { display: none;}
-
-         Need to fix or redo header if my solution doesnt fit review requirements
-         Right now burger works with sign-up sign-in links
-         */}
-
         <nav className='nav header__nav' >
           {
             isLoggedIn

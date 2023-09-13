@@ -14,8 +14,6 @@ function Register({ registerUser, errorMessage, setErrorMessage }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: REMOVE CONSOLE.LOG
-    console.log(values)
     registerUser({
       name: values.name,
       email: values.email,

@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../context/CurrentUserContext'
 import Header from '../Header';
 import Main from '../Main';
@@ -9,12 +9,13 @@ import Register from '../Register';
 import Login from '../Login';
 import Movies from '../Movies';
 import Profile from '../Profile';
+import EditProfile from "../EditProfile";
 import SavedMovies from '../SavedMovies';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { useEffect, useState } from 'react';
 import * as movieApi from '../../utils/moviesApi';
 import * as mainApi from '../../utils/mainApi';
-import { HTTP_STATUS_CODES, MESSAGES, SHORT_MOVIE_DURATION_IN_MINUTES } from '../../utils/constants';
+import { HTTP_STATUS_CODES, MESSAGES } from '../../utils/constants';
 
 function App() {
   const navigate = useNavigate();
@@ -23,102 +24,9 @@ function App() {
   const [ currentUser, setCurrentUser ] = useState({});
 
   const [ movies, setMovies ] = useState([]);
-  const [ filteredMovies, setFilteredMovies ] = useState([]);
-
-  const [ moviesSearchField, setMoviesSearchField ] = useState(localStorage.getItem('moviesSearchField') || '');
-  const [ shortMoviesCheckbox, setShortMoviesCheckbox ] = useState(localStorage.getItem('shortMoviesCheckbox') || false);
-
-
-  const [savedMoviesSearchField, setSavedMoviesSearchField] = useState('');
-  const [savedShortMoviesCheckbox, setSavedShortMoviesCheckbox] = useState(false);
-
   const [savedMovies, setSavedMovies] = useState([]);
-  const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
-
-
-  const [ preloader, setPreloader ] = useState(false); // TODO : REname to isLoading ???
+  const [ preloader, setPreloader ] = useState(false); // TODO : REname to isLoading ?
   const [ errorMessage, setErrorMessage ] = useState('');
-
-  const getMovies = () => {
-    movieApi
-      .getMovies()
-      .then(movies => {
-        const newMovies = movies.map(movie => ({
-          country: movie.country,
-          director: movie.director,
-          duration: movie.duration,
-          year: movie.year,
-          description: movie.description,
-          image: movieApi.BASE_URL + movie.image.url,
-          trailerLink: movie.trailerLink,
-          thumbnail: movieApi.BASE_URL + movie.image.formats.thumbnail.url,
-          movieId: movie.id,
-          nameRU: movie.nameRU,
-          nameEN: movie.nameEN,
-        }))
-
-        setMovies(newMovies);
-        // localStorage.setItem('movies', JSON.stringify(newMovies));
-      })
-      .catch((err) => {
-        console.log(err);
-        setErrorMessage(MESSAGES.UNKNOWN_SEARCH_ERROR);
-      })
-      .finally(() => {
-        setPreloader(false);
-      })
-  }
-
-  const filterMovies = (movies, searchField, searchFieldCheckbox) => {
-    return movies.filter((movie) =>
-      searchFieldCheckbox
-        ? movie.duration <= SHORT_MOVIE_DURATION_IN_MINUTES
-        && (movie.nameRU.toLowerCase().includes(searchField.toLowerCase())
-        || movie.nameEN.toLowerCase().includes(searchField.toLowerCase()))
-        : movie.nameRU.toLowerCase().includes(searchField.toLowerCase())
-          || movie.nameEN.toLowerCase().includes(searchField.toLowerCase())
-    )
-  }
-
-  const searchProcess = () => {
-    const newFilteredMovies = filterMovies(movies, moviesSearchField, shortMoviesCheckbox)
-    setFilteredMovies(newFilteredMovies)
-    localStorage.setItem('filteredMovies', JSON.stringify(newFilteredMovies));
-    localStorage.setItem('moviesSearchField', moviesSearchField);
-    localStorage.setItem('shortMoviesCheckbox', shortMoviesCheckbox);
-    // TODO: Maybe not done
-  }
-
-  useEffect(() => {
-    searchProcess();
-  }, [shortMoviesCheckbox,]);
-
-  const searchMovies = () => {
-    if (!moviesSearchField) {
-      setFilteredMovies([])
-      setErrorMessage(MESSAGES.EMPTY_SEARCH_ERROR);
-      setTimeout(()=> {
-        setErrorMessage('')
-      }, 4000);
-      return;
-    }
-
-    if (movies.length > 0) {
-      searchProcess(movies);
-      setPreloader(false);
-    } else {
-      getMovies();
-    }
-  }
-
-  const searchSavedMovies = () => {
-    const newFilteredMovies = filterMovies(
-      savedMovies,
-      savedMoviesSearchField,
-      savedShortMoviesCheckbox
-    );
-    setFilteredSavedMovies(newFilteredMovies);
-  };
 
   const registerUser = ({ name, email, password }) => {
     mainApi
@@ -132,15 +40,8 @@ function App() {
         } else {
           setErrorMessage(MESSAGES.REGISTRATION_ERROR);
         }
-        // TODO: Возможно нужно будет вывести какие-то ошибки.
       })
   }
-
-  const checkLike = (movie) => savedMovies.some((item) => item.movieId === movie.movieId);
-
-
-  // ============ AUTH ===================== //
-  // ============ AUTH ===================== //
 
   const loginUser = ({ email, password }) => {
     mainApi
@@ -158,7 +59,6 @@ function App() {
           console.log(err)
           // setErrorMessage(MESSAGES.REGISTRATION_ERROR);
         }
-        // TODO: Возможно нужно будет вывести какие-то ошибки.
       })
   }
 
@@ -167,55 +67,124 @@ function App() {
     setIsLoggedIn(false);
     setCurrentUser({});
     navigate('/');
-    setFilteredMovies([])
   }
-
 
   useEffect(() => {
     const token =  localStorage.getItem('jwt');
     if (!token) return;
 
     setIsLoggedIn(true);
-    mainApi
-      .getUserData()
-      .then(() => setIsLoggedIn(true))
-      .catch((err) => {
-        setIsLoggedIn(false);
-        console.log(err) // TODO: CLG
-      })
+    getCurrentUser()
   }, [])
+
+  function getCurrentUser() {
+    // setUsePreloader(true);
+    mainApi
+        .getUserData()
+        .then((userData) => {
+          setIsLoggedIn(true)
+          setCurrentUser(userData);
+          localStorage.setItem("userData", JSON.stringify(userData));
+        })
+        .catch((err) => {
+          setIsLoggedIn(false);
+          console.log(err) // TODO: CLG
+        })
+        .finally(() => {
+          // setUsePreloader(false);
+          // setIsTokenChecked(true);
+        });
+  }
 
   useEffect(() => {
     if (!isLoggedIn) return;
 
-    mainApi
-      .getUserData()
-      .then((userData) => {
-        setCurrentUser(userData);
-        localStorage.setItem("userData", JSON.stringify(userData));
-      })
-      .catch(console.log)
+    getCurrentUser()
 
-      // TODO: REDO IN Promise.all OR SOMETHING.
-      // CURRENTLY IN PROMISE ALL, IF NO MOVIES - USER DOESNT LOAD AND LOADS ERROR 404 - MOVIES NOT FOUND
+    Promise.all([movieApi.getMovies(), mainApi.getSavedMovies()])
+      .then(([movies, savedMovies]) => {
 
-    mainApi
-      .getSavedMovies()
-      .then((savedMovies) => {
-        setSavedMovies(savedMovies);
-        console.log('есть сохраненные фильмы. они попали в массив - savedMovies ')
-        // localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
-        setFilteredMovies([])
+        const updatedMovies = movies.map((movie) => {
+          const savedMovie = savedMovies.find(
+              (item) => item.movieId === movie.id,
+          );
+          if (savedMovie) {
+            return { ...movie, class: "like", key: movie.id };
+          }
+          return { ...movie, class: "default", key: movie.id };
+        });
+
+        const updatedSavedMovies = savedMovies.map((movie) => {
+          return { ...movie, class: "remove", key: movie._id };
+        });
+
+        setMovies(updatedMovies);
+        setSavedMovies(updatedSavedMovies);
       })
-      .catch((err) => {
-        if (err === HTTP_STATUS_CODES.NOT_FOUND) {
-          console.log(MESSAGES.SAVED_MOVIES_NOT_FOUND)
-        } else {
-          console.log(err)
-        }
-      })
+      .catch((error) => {
+        console.log(error);
+      });
 
   }, [isLoggedIn])
+
+  function profileUpdate({ name, email }) {
+    // setUsePreloader(true);
+    mainApi.updateUserData(name, email )
+      .then((res) => {
+        if (res !== false) {
+          navigate("/profile", { replace: true });
+          // setUseMessage("Профиль успешно обновлен");
+          getCurrentUser();
+        }
+      })
+      .catch((error) => {
+        // setUseMessage(error.message);
+        console.log(error.status);
+      })
+      .finally(() => {
+        // setUsePreloader(false);
+      });
+  }
+
+  function handleLikeMovie(movie) {
+    // setUsePreloader(true);
+    mainApi.createMovie(movie)
+      .then((res) => {
+        setMovies((state) =>
+          state.map((el) =>
+            el.id === res.movieId ? { ...el, class: "like" } : el,
+          ),
+        );
+        res.class = "remove";
+        setSavedMovies((prevMovies) => [...prevMovies, res]);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      // .finally(() => setUsePreloader(false));
+  }
+
+  function handleRemoveMovie(movieID) {
+    // setUsePreloader(true);
+    const removedMovie = savedMovies.find((item) => {
+      return item.movieId === movieID ? item : "";
+    });
+
+    mainApi.deleteSavedMovies(removedMovie._id)
+      .then(() => {
+        setSavedMovies((state) => state.filter((el) => el.movieId !== movieID));
+
+        setMovies((state) =>
+          state.map((el) =>
+            el.id === movieID ? { ...el, class: "default" } : el,
+          ),
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      // .finally(() => setUsePreloader(false));
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -252,19 +221,20 @@ function App() {
             </>
           } />
 
+            <Route path="/edit" element={
+              <>
+                <Header isLoggedIn={isLoggedIn} />
+                <EditProfile profileUpdate={profileUpdate}/>
+              </>
+            } />
+
           <Route path="/movies" element={
             <>
               <Header isLoggedIn={isLoggedIn} />
               <Movies
-                filteredMovies={filteredMovies}
-                moviesSearchField={moviesSearchField}
-                setMoviesSearchField={setMoviesSearchField}
-                shortMoviesCheckbox={shortMoviesCheckbox}
-                toggleCheckbox={() => setShortMoviesCheckbox(!shortMoviesCheckbox)}
-                searchMovies={searchMovies}
-                errorMessage={errorMessage}
-                preloader={preloader}
-                checkLike={checkLike}
+                movies={ movies }
+                handleLikeMovie={handleLikeMovie}
+                handleRemoveMovie={handleRemoveMovie}
               />
               <Footer />
             </>
@@ -274,14 +244,8 @@ function App() {
             <>
               <Header isLoggedIn={isLoggedIn} />
               <SavedMovies
+                handleRemoveMovie={handleRemoveMovie}
                 savedMovies={savedMovies}
-                savedMoviesSearchField={savedMoviesSearchField}
-                setSavedMoviesSearchField={setSavedMoviesSearchField}
-                savedShortMoviesCheckbox={savedShortMoviesCheckbox}
-                toggleCheckbox={() => setSavedShortMoviesCheckbox(!savedShortMoviesCheckbox)}
-                searchMovies={searchSavedMovies}
-                errorMessage={errorMessage}
-                preloader={preloader}
               />
               <Footer />
             </>

@@ -1,17 +1,25 @@
 import './FilterCheckbox.css'
+import {useState} from "react";
 
-function FilterCheckbox({
-  shortMoviesCheckbox,
-  toggleCheckbox,
-}) {
+function FilterCheckbox(props) {
+  const [isChecked, setIsChecked] = useState(props.checked);
+
+  const handleToggle = () => {
+    const newChecked = !isChecked;
+    setIsChecked(newChecked);
+    props.onToggle(newChecked);
+    props.onSubmit({ search: props.filmValue });
+  };
+
   return (
     <div className="switch">
-      <label className="switch__label">
+      <label className="switch__label" htmlFor="checkbox">
         <input
+          id="checkbox"
           type="checkbox"
           className="switch__input"
-          checked={shortMoviesCheckbox}
-          onChange={toggleCheckbox}
+          checked={isChecked}
+          onChange={handleToggle}
         />
         <span className="switch__checkbox"></span>
           Короткометражки

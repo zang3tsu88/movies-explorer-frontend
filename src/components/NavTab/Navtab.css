@@ -32,12 +32,6 @@
   transform: translateX(0%);
 }
 
-/* .navtab__btn-close {
-  position: absolute;
-  top: 23px;
-  right: 23px;
-} */
-
 .navtab__link-list {
   display: grid;
   justify-items: center;
@@ -76,7 +70,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .navtab {
     display: none;
   }

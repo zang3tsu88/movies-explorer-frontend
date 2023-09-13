@@ -1,9 +1,7 @@
 import { useContext } from 'react';
 import './Profile.css'
 import CurrentUserContext from '../../context/CurrentUserContext';
-import classNames from 'classnames';
-
-const isEditing = false;
+import {Link} from "react-router-dom";
 
 function Profile({ logout, errorMessage, setErrorMessage, }) {
   const currentUser = useContext(CurrentUserContext);
@@ -11,54 +9,27 @@ function Profile({ logout, errorMessage, setErrorMessage, }) {
   return (
     <section className='profile'>
       <h1 className="profile__title">Привет, {currentUser.name}</h1>
-      <form className="profile__form" name="profile">
-
-        {/* <div className="form__input-container"> */}
-
+      <div className="profile__form">
         <div className="profile__input-field">
-          <label className="profile__label">Имя</label>
-          <input
-            className="profile__input"
-            type="text"
-            name="name"
-            value={currentUser.name}
-          />
+          <p className="profile__label">Имя</p>
+          <p className="profile__input">{currentUser.name}</p>
         </div>
         <div className="profile__input-field">
-          <label className="profile__label">E-mail</label>
-          <input
-            className="profile__input"
-            type="email"
-            name="email"
-            value={currentUser.email}
-          />
+          <p className="profile__label">E-mail</p>
+          <p className="profile__input">{currentUser.email}</p>
         </div>
-        {/* <span className="form__error" /> */}
-        {/* </div> */}
+      </div>
 
-      </form>
-
-      <span className={classNames(
-            'form__error',
-            'form__error_submit',
-            {'form__error_active' : errorMessage}
-            )}
+        <Link className="link profile__edit" type="button" to="/edit">
+            Редактировать
+        </Link>
+        <button
+            className="link profile__logout"
+            type="button"
+            onClick={logout}
         >
-          {errorMessage}
-        </span>
-
-
-      {isEditing
-        ? <button type="submit" className="link form__submit-btn">Сохранить</button>
-        : <button className="link profile__edit">Редактировать</button>}
-
-      {!isEditing
-        && (<button
-          className="link profile__logout"
-          onClick={logout}
-        >
-          Выйти из&nbsp;аккаунта
-        </button>)}
+            Выйти из аккаунта
+        </button>
 
     </section>
   )

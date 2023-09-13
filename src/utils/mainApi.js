@@ -1,4 +1,4 @@
-// const BASE_URL = 'api.promovies.nomoredomains.work'
+// const BASE_URL = 'https://api.promovies.nomoredomains.work'
 const BASE_URL = 'http://localhost:3000'
 
 const getJson = (res) => {
@@ -71,7 +71,20 @@ export const createMovie = (movie) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
-    body: JSON.stringify(movie)
+    body: JSON.stringify({
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: "https://api.nomoreparties.co" + movie.image.url,
+      trailerLink: movie.trailerLink,
+      thumbnail:
+        "https://api.nomoreparties.co" + movie.image.formats.thumbnail.url,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    }),
   })
     .then(getJson);
 }
