@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://api.promovies.nomoredomains.work'
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'https://api.promovies.nomoredomains.work'
+// const BASE_URL = 'http://localhost:3000'
 
 const getJson = (res) => {
   if (res.ok) {
