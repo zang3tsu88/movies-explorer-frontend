@@ -17,15 +17,15 @@ This is a 4th project from a [Yandex Practicum](https://practicum.yandex.ru/) we
 
 ### Links
 
-- Link to Figma Sketch: [Figma Sketch online](https://www.figma.com/file/7YiKUjzM8f9VhHYiZLVoIH/diploma?type=design&node-id=891-3857&mode=design&t=wwkowcQfquQB89Pp-0)
-- Link to Figma file: [Google Disk](https://drive.google.com/file/d/1qScsKSS9kIKWcWZ7KhiNDzK0t7DrbPtA/view?usp=drive_link)
-- Link to Live Site: (promovies.nomoredomains.work)
-- Link to Backend: (api.promovies.nomoredomains.work)
-- Link to pull request: ()
+- Link to: [Figma Sketch Online](https://www.figma.com/file/7YiKUjzM8f9VhHYiZLVoIH/diploma?type=design&node-id=891-3857&mode=design&t=wwkowcQfquQB89Pp-0)
+- Link to: [Figma File on Google Disk](https://drive.google.com/file/d/1qScsKSS9kIKWcWZ7KhiNDzK0t7DrbPtA/view?usp=drive_link)
+- Link to: [Live Site](promovies.nomoredomains.work)
+- Link to: [Backend](api.promovies.nomoredomains.work)
+- Link to: [Pull Request](https://github.com/zang3tsu88/movies-explorer-frontend/pull/2)
 
 ### Other
 
-- 158.160.100.240
+158.160.100.240
 
 ```bash
 # возвращает информацию о пользователе (email и имя)
