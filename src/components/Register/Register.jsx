@@ -1,5 +1,4 @@
 import './Register.css'
-import logo from '../../images/logo.svg'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames';
 import useForm from '../../hooks/useForm'
@@ -28,7 +27,7 @@ function Register({ registerUser, errorMessage, setErrorMessage }) {
 
   return (
     <div className="form-container">
-      <img src={logo} alt="логотип" className="logo form-container__logo" />
+      <Link to="/" className='link logo form-container__logo' />
       <h1 className="form-container__title">Добро пожаловать!</h1>
       <form className="form" name="register" onSubmit={handleSubmit} noValidate>
         <div className="form__input-container">

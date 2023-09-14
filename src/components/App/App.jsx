@@ -96,29 +96,31 @@ function App() {
         });
   }
 
+  function getBitFilms() {
+    movieApi.getMovies().then((movies) => {
+      const updatedMovies = movies.map((movie) => {
+        const savedMovie = savedMovies.find(
+            (item) => item.movieId === movie.id,
+        );
+        if (savedMovie) {
+          return { ...movie, class: "like", key: movie.id };
+        }
+        return { ...movie, class: "default", key: movie.id };
+      });
+
+      setMovies(updatedMovies);
+    })
+  }
+
   useEffect(() => {
     if (!isLoggedIn) return;
 
     getCurrentUser()
-
-    Promise.all([movieApi.getMovies(), mainApi.getSavedMovies()])
-      .then(([movies, savedMovies]) => {
-
-        const updatedMovies = movies.map((movie) => {
-          const savedMovie = savedMovies.find(
-              (item) => item.movieId === movie.id,
-          );
-          if (savedMovie) {
-            return { ...movie, class: "like", key: movie.id };
-          }
-          return { ...movie, class: "default", key: movie.id };
-        });
-
+    mainApi.getSavedMovies()
+      .then((savedMovies) => {
         const updatedSavedMovies = savedMovies.map((movie) => {
           return { ...movie, class: "remove", key: movie._id };
         });
-
-        setMovies(updatedMovies);
         setSavedMovies(updatedSavedMovies);
       })
       .catch((error) => {
@@ -235,6 +237,7 @@ function App() {
                 movies={ movies }
                 handleLikeMovie={handleLikeMovie}
                 handleRemoveMovie={handleRemoveMovie}
+                getBitFilms={getBitFilms}
               />
               <Footer />
             </>

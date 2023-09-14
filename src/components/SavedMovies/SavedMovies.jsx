@@ -11,21 +11,23 @@ function SavedMovies( props ) {
     const [shortFilmsOnly, setShortFilmsOnly] = useState(false);
 
     const movies = filterMovies(props.savedMovies, query, shortFilmsOnly, 0);
+    const [useSearch, setUseSearch] = useState(false)
 
     const userMoviesCards = movies.filteredMovies.map((el) => {
       return (
         <MoviesCard
-            key={el.movieId}
-            id={el.movieId}
-            class={el.class}
-            movie={el}
-            onRemove={props.handleRemoveMovie}
+          key={el.movieId}
+          id={el.movieId}
+          class={el.class}
+          movie={el}
+          onRemove={props.handleRemoveMovie}
         />
       );
     });
 
     function handleSearch(query) {
       setQuery(query);
+      setUseSearch(true)
     }
 
     function handleToggleShortFilms(checked) {
@@ -42,7 +44,7 @@ function SavedMovies( props ) {
       {/* <Preloader /> */}
 
       <section className="movies">
-        <MoviesCardList isSaved={true} moviesCards={userMoviesCards}/>
+        <MoviesCardList isSaved={true} moviesCards={userMoviesCards} useSearch={useSearch}/>
       </section>
     </main>
   )

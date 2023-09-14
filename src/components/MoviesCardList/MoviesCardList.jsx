@@ -4,7 +4,7 @@ function MoviesCardList(props) {
 
   return (
     <>
-      {props.moviesCards.length > 0 ? (
+      {props.moviesCards.length > 0 || !props.useSearch ? (
         <ul className="list movies__list">{props.moviesCards}</ul>
       ) : (
         <p className={"movies__message"}>Ничего не найдено</p>
