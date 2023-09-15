@@ -34,7 +34,9 @@ const useModalClose = (isOpen, toggleModal) => {
   }, [isOpen, toggleModal])
 
   useEffect(() => {
-    toggleModal();
+    if (isOpen) {
+      toggleModal();
+    }
   }, [location.pathname])
 
 
