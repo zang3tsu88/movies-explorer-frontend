@@ -3,7 +3,7 @@ import './Profile.css'
 import CurrentUserContext from '../../context/CurrentUserContext';
 import {Link} from "react-router-dom";
 
-function Profile({ logout, errorMessage, setErrorMessage, }) {
+function Profile({ logout, errorMessage, userMessage }) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -19,6 +19,7 @@ function Profile({ logout, errorMessage, setErrorMessage, }) {
           <p className="profile__input">{currentUser.email}</p>
         </div>
       </div>
+        <span className="form__input-message" >{userMessage !== '' ? userMessage : ''}</span>
 
         <Link className="link profile__edit" type="button" to="/edit">
             Редактировать

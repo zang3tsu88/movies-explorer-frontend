@@ -55,16 +55,23 @@
 .header__link-container {
   display: flex;
   gap: 16px;
+  align-items: baseline;
 }
 
-.header__link_type_movies {
-  font-size: 13px;
-  line-height: 18px; /* 138.462% */
-}
-.header__link_type_saved-movies {
+/* .header__link_type_movies {
   font-size: 13px;
   font-weight: 400;
+  line-height: 18px;
+}
+.header__link_type_saved-movies {
+  font-weight: 400;
+}
+ */
+
+.active {
+  font-size: 13px;
   line-height: 18px; /* 138.462% */
+  font-weight: 500;
 }
 
 /* ACCOUNT BUTTON  */

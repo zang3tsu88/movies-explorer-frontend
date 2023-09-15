@@ -5,43 +5,45 @@ export const INT_60_MIN = 60;
 
 export const CARD_ADD = {
   WIDTH_1280: 3,
-  WIDTH_1024: 2,
-  WIDTH_768: 1,
-}
+  WIDTH_1274: 2,
+  WIDTH_856: 2,
+};
 
 export const CARD_COUNT = {
   WIDTH_1280: 12,
-  WIDTH_1024: 8,
-  WIDTH_768: 5,
-}
+  WIDTH_1274: 8,
+  WIDTH_856: 5,
+};
 
 export const MESSAGES = {
-  NOTHING_FOUND_SEARCH_ERROR: 'Ничего не найдено',
-  UNKNOWN_SEARCH_ERROR: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
-  EMPTY_SEARCH_ERROR: 'Нужно ввести ключевое слово',
-  NAME_ERROR: 'Имя должно содержать только латиницу, кириллицу, пробел и/или дефис.',
-  EMAIL_ERROR: 'Некорректный email',
-  URL_ERROR: 'Некорректный URL адрес',
-  PAGE_NOT_FOUND: '  (✖╭╮✖)   Страница по указанному маршруту не найдена.',
+  NOTHING_FOUND_SEARCH_ERROR: "Ничего не найдено",
+  UNKNOWN_SEARCH_ERROR:
+    "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз",
+  EMPTY_SEARCH_ERROR: "Нужно ввести ключевое слово",
+  NAME_ERROR:
+    "Имя должно содержать только латиницу, кириллицу, пробел и/или дефис.",
+  EMAIL_ERROR: "Некорректный email",
+  URL_ERROR: "Некорректный URL адрес",
+  PAGE_NOT_FOUND: "  (✖╭╮✖)   Страница по указанному маршруту не найдена.",
 
-  INCORRECT_EMAIL_OR_PASS: 'Вы ввели неправильный логин или пароль.',
+  INCORRECT_EMAIL_OR_PASS: "Вы ввели неправильный логин или пароль.",
   // AUTHORIZATION_TOKEN_ERROR: 'При авторизации произошла ошибка. Токен не передан или передан не в том формате.',
   // AUTHORIZATION_INVALID_TOKEN_ERROR: 'При авторизации произошла ошибка. Переданный токен некорректен.',
 
-  EMAIL_ALREADY_EXISTS: 'Пользователь с таким email уже существует.',
-  REGISTRATION_ERROR: 'При регистрации пользователя произошла ошибка.', // frontend - badrequest
+  EMAIL_ALREADY_EXISTS: "Пользователь с таким email уже существует.",
+  REGISTRATION_ERROR: "При регистрации пользователя произошла ошибка.", // frontend - badrequest
 
-  PROFILE_UPDATE_ERROR: 'При обновлении профиля произошла ошибка.',
+  PROFILE_UPDATE_ERROR: "При обновлении профиля произошла ошибка.",
 
-  USER_NOT_FOUND: 'Пользователь не найден.',
-  SAVED_MOVIES_NOT_FOUND: 'Нет сохранненых фильмов.',
-  MOVIE_NOT_FOUND: 'Фильм с указанным _id не найден',
-  FORBIDDEN_DELETE_MOVIE: 'Нельзя удалить чужой фильм',
-  INCORRECT_DATA: 'Переданы некорректные данные.', // backend - badrequest
-  AUTHORIZATION_REQUIRED: 'Необходимо авторизоваться',
-  MOVIE_CREATED: 'Фильм успешно создан.',
-  MOVIE_DELETED: 'Фильм удален.',
-  INTERNAL_SERVER_ERROR: 'На сервере произошла ошибка',
+  USER_NOT_FOUND: "Пользователь не найден.",
+  SAVED_MOVIES_NOT_FOUND: "Нет сохранненых фильмов.",
+  MOVIE_NOT_FOUND: "Фильм с указанным _id не найден",
+  FORBIDDEN_DELETE_MOVIE: "Нельзя удалить чужой фильм",
+  INCORRECT_DATA: "Переданы некорректные данные.", // backend - badrequest
+  AUTHORIZATION_REQUIRED: "Необходимо авторизоваться",
+  MOVIE_CREATED: "Фильм успешно создан.",
+  MOVIE_DELETED: "Фильм удален.",
+  INTERNAL_SERVER_ERROR: "На сервере произошла ошибка",
 
   // TODO(zang3tsu88): remove extra messages
 
@@ -62,7 +64,6 @@ export const MESSAGES = {
   // Другое
   // 1. 500 На сервере произошла ошибка.
   // 2. 404 Страница по указанному маршруту не найдена.
-
 };
 
 export const HTTP_STATUS_CODES = {
@@ -128,5 +129,5 @@ export const HTTP_STATUS_CODES = {
   LOOP_DETECTED: 508,
   BANDWIDTH_LIMIT_EXCEEDED: 509,
   NOT_EXTENDED: 510,
-  NETWORK_AUTHENTICATION_REQUIRED: 511
-}
+  NETWORK_AUTHENTICATION_REQUIRED: 511,
+};
