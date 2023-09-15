@@ -1,6 +1,9 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const useModalClose = (isOpen, toggleModal) => {
+
+  const location = useLocation()
   useEffect(() => {
     // prevents scrolling when modal is open
     // close on overlay click and esc key press
@@ -29,6 +32,10 @@ const useModalClose = (isOpen, toggleModal) => {
       document.body.style.overflow = 'unset'
     };
   }, [isOpen, toggleModal])
+
+  useEffect(() => {
+    toggleModal();
+  }, [location.pathname])
 
 
 }
