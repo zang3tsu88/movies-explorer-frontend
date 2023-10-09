@@ -54,6 +54,11 @@
   background: #4285F4;
 }
 
+.search-form__btn:disabled {
+  opacity: 0.8;
+  background: #3456F3;
+}
+
 @media (max-width: 768px) {
   .search {
     padding: 80px 30px 0;

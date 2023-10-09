@@ -3,45 +3,16 @@
   padding: 80px 70px;
 }
 
-.movies__more-btn {
-  color: #FFF;
-  text-align: center;
-  font-family: 'Inter';
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-
-  margin-top: 60px;
-  height: 36px;
-  width: 100%;
-  border: none;
-  border-radius: 6px;
-  background: #2F2F2F;
-
-}
-
 @media (max-width: 768px) {
-
   .movies {
     padding: 80px 30px;
   }
 
-  .movies__more-btn {
-    margin-top: 80px;
-  }
-
 }
 
-
 @media (max-width: 500px) {
-
   .movies {
     padding: 50px 10px 80px;
   }
 
-
-  .movies__more-btn {
-    margin-top: 80px;
-  }
 }
